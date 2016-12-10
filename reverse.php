@@ -107,7 +107,9 @@ if($_SESSION['count'] > 0){
 								$split = str_split($rev);
 								$_SESSION['map'][$split[0]][$split[1]] = WHITE;
 							}
+							$_SESSION['map'][$data[0]][$data[1]] = WHITE;
 							//白石リストに追加
+							array_push($_SESSION['cp_map'],$_SESSION['cp_can_put'][$target_id]);
 							array_push($_SESSION['cp_map'],$reverse);
 						}
 						break; //k
