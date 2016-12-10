@@ -2,6 +2,8 @@
 define('BLACK',"&#x25cf;");
 define('WHITE',"&#x25cb;");
 
+require_once('search.php');
+
 session_start();
 
 //初期化
@@ -181,17 +183,8 @@ if($_SESSION['count'] > 0){
 	print_r($_SESSION['cp_can_put']);
 
 	//置ける場所の追加
-	foreach($_SESSION['cp_map'] as $white_coord){
-		$white = str_split($white_coord);
-		for($i=-1;$i<2;++$i){ //横方向
-			for($j=-1;$j<2;++$j){ //縦方向
-				if(isset($_SESSION['map'][$i][$j]) || ($i == 0 && $j == 0)){
-					continue;
-				}
-				array_push($_SESSION['can_put'],$i.$j);
-			}
-		}
-	}
+	//プレイヤーが置ける場所
+	search_can_put($_SESSION['cp_map'],$_SESSION['can_put']);
 }
 /*
  * あとやること
