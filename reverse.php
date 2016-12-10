@@ -74,7 +74,7 @@ $_SESSION['cp_can_put'] = array_values($_SESSION['cp_can_put']);
 //白が置ける場所を探索
 //とりあえず無作為における場所を探す
 $max = count($_SESSION['cp_can_put']);
-if($max == 0){
+if($max == 0 || count($_SESSION['cp_map']) == 0){
 	echo '<p>You win!</p>';
 }
 else{
