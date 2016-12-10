@@ -16,6 +16,9 @@ function search_can_put($map,$putmap){
 			}
 		}
 	}
+	//念のため
+	$putmap = array_diff($putmap,$_SESSION['cp_map']);
+	$putmap = array_diff($putmap,$_SESSION['pl_map']);
 	$putmap = array_unique($putmap);
 	$putmap = array_values($putmap);
 

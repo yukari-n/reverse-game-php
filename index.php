@@ -178,8 +178,8 @@ if($_SESSION['count'] > 0 && count($_SESSION['cp_can_put']) == 0 && count($_SESS
 
 	//$black_count = count($_SESSION['pl_map']);
 	//$white_count = count($_SESSION['cp_map']);
-	$black_count = count($_SESSION['pl_map']);
-	$white_count = count($_SESSION['cp_map']);
+	$black_count = 0;
+	$white_count = 0;
 	for($i=-1;$i<2;++$i){ //横方向
 		for($j=-1;$j<2;++$j){ //縦方向
 			if($_SESSION['map'][$i][$j] == BLACK){
@@ -192,7 +192,7 @@ if($_SESSION['count'] > 0 && count($_SESSION['cp_can_put']) == 0 && count($_SESS
 	}
 
 	echo '<p>There are ',$white_count,' white stones.</p>';
-	echo '<p>There are ',count($_SESSION['pl_map']),' black stones.</p>';
+	echo '<p>There are ',$black_count,' black stones.</p>';
 
 	if($white_count > $black_count){
 		echo '<p style="color:#00f;">I win!</p>';
