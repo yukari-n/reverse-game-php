@@ -19,9 +19,6 @@ function reverse_stone($color,$target){
 	}
 	$data = str_split($target);
 
-	//置くおかないに関わらず削除
-	$me_put_map = array_diff($me_put_map,$target);
-
 	if($color == 'B' && $do_put){
 		echo '<p>You put at (',$data[0],',',$data[1],')</p>';
 	}
@@ -73,6 +70,8 @@ function reverse_stone($color,$target){
 			echo '<p>I drop (',$data[0],',',$data[1],') from the list.</p>';
 		}
 	}
+	//置くおかないに関わらず削除
+	$me_put_map = array_diff($me_put_map,$target);
 
 	$me_map = array_unique($me_map);
 	$me_map = array_values($me_map);
