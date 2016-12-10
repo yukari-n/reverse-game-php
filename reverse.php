@@ -14,6 +14,10 @@ $map[4][5] = BLACK;
 $map[4][4] = WHITE;
 $map[5][5] = WHITE;
 
+//黒が置ける場所の初期値
+$can_put = array(43,34,65,56);
+
+
 session_start();
 
 if(!isset($_SESSION['count'])) {
@@ -21,6 +25,9 @@ if(!isset($_SESSION['count'])) {
 }else{
 	++$_SESSION['count'];
 }
+
+//文字列分解
+//str_split($str);
 /*
 if(!isset($_SESSION['put'])) {
 	$_SESSION['put'] = 0;

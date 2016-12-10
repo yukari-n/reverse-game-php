@@ -14,8 +14,9 @@ table{border:solid 1px #000;border-collapse:collapse}
 td{border:solid 1px #000}
 </style>
 </head>
-<body><?php
-echo '<h1>under construction</h1>';
+<body>
+<h1>under construction</h1>
+<?php
 
 include('reverse.php');
 
@@ -24,8 +25,12 @@ echo '<table>';
 for($i=1;$i<=8;++$i){
 	echo '<tr>';
 	for($j=1;$j<=8;++$j){
+		$coord = $i.$j;
 		echo '<td>';
-		if(!isset($map[$i][$j])){
+		if(in_array($coord,$can_put)){
+			echo '<input type="radio" name="putted" value="',$coord,'">';
+		}
+		elseif(!isset($map[$i][$j])){
 			echo '　';
 		}
 		else{

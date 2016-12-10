@@ -1,4 +1,5 @@
 <?php
+//上手く動いてない
 print_r($_SESSION);
 $_SESSION = array();
 session_destroy();
