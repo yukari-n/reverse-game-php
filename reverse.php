@@ -70,67 +70,67 @@ for($i=-1;$i<2;++$i){
 $_SESSION['can_put'] = array_values($_SESSION['can_put']);
 $_SESSION['cp_can_put'] = array_values($_SESSION['cp_can_put']);
 
-
-//白が置ける場所を探索
-//とりあえず無作為における場所を探す
-$max = count($_SESSION['cp_can_put']);
-if($max == 0 || count($_SESSION['cp_map']) == 0){
-	echo '<p>You win!</p>';
-}
-else{
-	echo '<p>I can put ',$max,' places.</p>';
-	print_r($_SESSION['cp_can_put']);
-	$count = 0;
-	$do_put = null;
-	$rev_count = 0;
-	while($count < $max && !$do_put){
-		$target = array_rand($_SESSION['cp_can_put']);
-		$data = str_split($target);
-		echo '<p>I choose (',$data[0],',',$data[1],').</p>';
-		//ひっくり返せる場所を探す
-		$checked = 0;
-		for($i=-1;$i<2;++$i){ //横方向
-			for($j=-1;$j<2;++$j){ //縦方向
-				if(!isset($_SESSION['map'][$data[0]+$i][$data[1]+$j]) || ($i == 0 && $j == 0)){continue;}
-				$reverse = array(); //ひっくり返すかもしれないもの
-				for($k=1;$k<=8;++$k){
-					$x = $i * $k + $data[0];
-					$y = $j * $k + $data[1];
-					$put = $x.$y;
-					if($_SESSION['map'][$x][$y] == BLACK){
-						++$rev_count;
-						array_push($reverse,$put);
-					}
-					elseif($_SESSION['map'][$x][$y] == WHITE && $rev_count > 0){ //白石発見かつ裏返すものがある
-						$do_put = 1;
-						foreach($reverse as $rev){
-							$split = str_split($rev);
-							$_SESSION['map'][$split[0]][$split[1]] = WHITE;
+if($_SESSION['count'] > 0){
+	//白が置ける場所を探索
+	//とりあえず無作為における場所を探す
+	$max = count($_SESSION['cp_can_put']);
+	if($max == 0 || count($_SESSION['cp_map']) == 0){
+		echo '<p>You win!</p>';
+	}
+	else{
+		echo '<p>I can put ',$max,' places.</p>';
+		print_r($_SESSION['cp_can_put']);
+		$count = 0;
+		$do_put = null;
+		$rev_count = 0;
+		while($count < $max && !$do_put){
+			$target_id = array_rand($_SESSION['cp_can_put']);
+			$data = str_split($_SESSION['cp_can_put'][$target_id]);
+			echo '<p>I choose (',$data[0],',',$data[1],').</p>';
+			//ひっくり返せる場所を探す
+			$checked = 0;
+			for($i=-1;$i<2;++$i){ //横方向
+				for($j=-1;$j<2;++$j){ //縦方向
+					if(!isset($_SESSION['map'][$data[0]+$i][$data[1]+$j]) || ($i == 0 && $j == 0)){continue;}
+					$reverse = array(); //ひっくり返すかもしれないもの
+					for($k=1;$k<=8;++$k){
+						$x = $i * $k + $data[0];
+						$y = $j * $k + $data[1];
+						$put = $x.$y;
+						if($_SESSION['map'][$x][$y] == BLACK){
+							++$rev_count;
+							array_push($reverse,$put);
 						}
-						//白石リストに追加
-						array_push($_SESSION['cp_map'],$reverse);
+						elseif($_SESSION['map'][$x][$y] == WHITE && $rev_count > 0){ //白石発見かつ裏返すものがある
+							$do_put = 1;
+							foreach($reverse as $rev){
+								$split = str_split($rev);
+								$_SESSION['map'][$split[0]][$split[1]] = WHITE;
+							}
+							//白石リストに追加
+							array_push($_SESSION['cp_map'],$reverse);
+						}
+						break; //k
 					}
-					break; //k
-				}
-				++$checked;
-				echo '<p>I checked ',$checked,' directions.</p>';
-				if($do_put){
-					echo '<p>I put at (',$data[0],',',$data[1],').</p>';
-					break; //j
-				}
-				else{
-					echo '<p>I will check another direction.</p>';
+					++$checked;
+					echo '<p>I checked ',$checked,' directions.</p>';
+					if($do_put){
+						echo '<p>I put at (',$data[0],',',$data[1],').</p>';
+						break; //j
+					}
+					else{
+						echo '<p>I will check another direction.</p>';
+					}
 				}
 			}
+			++$count;
 		}
-		++$count;
+		echo '<p>There are ',count($_SESSION['cp_map']),' white stones.</p>';
 	}
-	echo '<p>There are ',count($_SESSION['cp_map']),' white stones.</p>';
+	if(!$do_put){
+		echo '<p>I cannot put my stone! Please continue.</p>';
+	}
 }
-if(!$do_put){
-	echo '<p>I cannot put my stone! Please continue.</p>';
-}
-
 /*
  * あとやること
  * 置ける場所の更新
