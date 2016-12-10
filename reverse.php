@@ -69,6 +69,8 @@ for($i=-1;$i<2;++$i){
 //indexを詰める（念のため）
 $_SESSION['can_put'] = array_values($_SESSION['can_put']);
 $_SESSION['cp_can_put'] = array_values($_SESSION['cp_can_put']);
+echo '<p>The white stones</p>';
+print_r($_SESSION['cp_map']);
 
 if($_SESSION['count'] > 0){
 	//白が置ける場所を探索
@@ -78,7 +80,7 @@ if($_SESSION['count'] > 0){
 		echo '<p>You win!</p>';
 	}
 	else{
-		echo '<p>I can put ',$max,' places.</p>';
+		echo '<p>I could put ',$max,' places.</p>';
 		print_r($_SESSION['cp_can_put']);
 		$count = 0;
 		$do_put = null;
