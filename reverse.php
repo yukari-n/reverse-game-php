@@ -12,8 +12,14 @@ if(!isset($_SESSION['map'])){
 			$_SESSION['map'][$i][$j] = null;
 		}
 	}
-	$_SESSION['map'][5][4] = BLACK;
-	$_SESSION['map'][4][5] = BLACK;
+}
+//黒の初期位置
+if(!isset($_SESSION['pl_map'])){
+	$_SESSION['pl_map'] = array(54,45);
+	foreach($_SESSION['pl_map'] as $pl){
+		$data = str_split($pl);
+		$_SESSION['map'][$data[0]][$data[1]] = BLACK;
+	}
 }
 //白の初期位置
 if(!isset($_SESSION['cp_map'])){
@@ -189,7 +195,7 @@ if($_SESSION['count'] > 0){
 }
 /*
  * あとやること
- * 置ける場所の更新（追加）
+ * 置ける場所の更新（追加）：ユーザーがおき終わった時点でやるべし
  * 置いてはいけない場所の削除
  * パス機能（自動でも良い）
  * 全部埋まるかパスが続いたら終了、戦績を計算
