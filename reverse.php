@@ -173,11 +173,24 @@ if($_SESSION['count'] > 0){
 	echo '<p>There are ',count($_SESSION['cp_map']),' white stones.</p>';
 	echo '<p>I could put ',count($_SESSION['cp_can_put']),' places.</p>';
 	print_r($_SESSION['cp_can_put']);
+
+	//置ける場所の追加
+	foreach($_SESSION['cp_map'] as $white_coord){
+		$white = str_split($white_coord);
+		for($i=-1;$i<2;++$i){ //横方向
+			for($j=-1;$j<2;++$j){ //縦方向
+				if(isset($_SESSION['map'][$i][$j]) || ($i == 0 && $j == 0)){
+					continue;
+				}
+				array_push($_SESSION['can_put'],$i.$j);
+			}
+		}
+	}
 }
 /*
  * あとやること
- * 置ける場所の更新
- * 白（コンピューターの動作）
- * パス機能
+ * 置ける場所の更新（追加）
+ * 置いてはいけない場所の削除
+ * パス機能（自動でも良い）
  * 全部埋まるかパスが続いたら終了、戦績を計算
  */
