@@ -72,32 +72,33 @@ $_SESSION['cp_can_put'] = array_values($_SESSION['cp_can_put']);
 echo '<p>The white stones</p>';
 print_r($_SESSION['cp_map']);
 
-
-echo '<p>プレイヤーが置いた時点</p><table>';
-for($j=0;$j<=8;++$j){//x,yにするため表示はiとjが逆
-	echo '<tr>';
-	for($i=0;$i<=8;++$i){
-		echo '<td>';
-		$coord = $i.$j;
-		if($i == 0){
-			echo $j;
-		}
-		elseif($j == 0){
-			echo $i;
-		}
-		elseif(!isset($_SESSION['map'][$i][$j])){
-			echo '　';
-		}
-		else{
-			echo $_SESSION['map'][$i][$j];
-		}
-		echo '</td>';
-	}
-	echo '</tr>';
-}
-echo '</table>';
-
 if($_SESSION['count'] > 0){
+	echo '<p>プレイヤーが置いた時点</p><table>';
+	for($j=0;$j<=8;++$j){//x,yにするため表示はiとjが逆
+		echo '<tr>';
+		for($i=0;$i<=8;++$i){
+			echo '<td>';
+			$coord = $i.$j;
+			if($i == 0){
+				echo $j;
+			}
+			elseif($j == 0){
+				echo $i;
+			}
+			elseif(!isset($_SESSION['map'][$i][$j])){
+				echo '　';
+			}
+			else{
+				echo $_SESSION['map'][$i][$j];
+			}
+			echo '</td>';
+		}
+		echo '</tr>';
+	}
+	echo '</table>';
+
+
+
 	//白が置ける場所を探索
 	//とりあえず無作為における場所を探す
 	$max = count($_SESSION['cp_can_put']);
@@ -117,9 +118,12 @@ if($_SESSION['count'] > 0){
 			$checked = 0;
 			for($i=-1;$i<2;++$i){ //横方向
 				for($j=-1;$j<2;++$j){ //縦方向
-					if(!isset($_SESSION['map'][$data[0]+$i][$data[1]+$j]) || ($i == 0 && $j == 0)){continue;}
+					++$checked;
+					// 隣接石が無い方向・隣接石が白or置いた場所はスキップ
+					if($_SESSION['map'][$data[0]+$i][$data[1]+$j] != BLACK || ($i == 0 && $j == 0)){
+						continue;
+					}
 					$reverse = array(); //ひっくり返すかもしれないもの
-					$rev_count = 0;
 					for($k=1;$k<=8;++$k){
 						$x = $i * $k + $data[0];
 						$y = $j * $k + $data[1];
@@ -128,7 +132,7 @@ if($_SESSION['count'] > 0){
 							++$rev_count;
 							array_push($reverse,$put);
 						}
-						elseif($_SESSION['map'][$x][$y] == WHITE && $rev_count > 0){ //白石発見かつ裏返すものがある
+						elseif($_SESSION['map'][$x][$y] == WHITE){ //白石発見（隣接していない）
 							$do_put = 1;
 							foreach($reverse as $rev){
 								$split = str_split($rev);
@@ -138,10 +142,12 @@ if($_SESSION['count'] > 0){
 							//白石リストに追加
 							array_push($_SESSION['cp_map'],$_SESSION['cp_can_put'][$target_id]);
 							array_push($_SESSION['cp_map'],$reverse);
+							break; //k
 						}
-						break; //k
-					}
-					++$checked;
+						else{ //挟めなかった
+							break; //k
+						}
+					} //k
 					echo '<p>I checked ',$checked,' directions.</p>';
 					if($do_put){
 						echo '<p>I put at (',$data[0],',',$data[1],').</p>';
@@ -150,8 +156,9 @@ if($_SESSION['count'] > 0){
 					else{
 						echo '<p>I will check another direction.</p>';
 					}
-				}
-			}
+				} //j
+				if($do_put){break; //i}
+			} //i
 			++$count;
 		}
 		echo '<p>There are ',count($_SESSION['cp_map']),' white stones.</p>';
