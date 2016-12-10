@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/earlyaccess/sawarabigothic.css" rel="stylesheet" />
 <style>
 table{border:solid 1px #000;border-collapse:collapse}
-td{border:solid 1px #000}
+td{border:solid 1px #000;text-align:center;vertical-align:middle}
 </style>
 </head>
 <body>
@@ -21,7 +21,7 @@ td{border:solid 1px #000}
 include('reverse.php');
 
 echo $_SESSION['count'].'手目';
-echo '<table>';
+echo '<form action="index.php" method="post"><table>';
 for($i=1;$i<=8;++$i){
 	echo '<tr>';
 	for($j=1;$j<=8;++$j){
@@ -40,7 +40,7 @@ for($i=1;$i<=8;++$i){
 	}
 	echo '</tr>';
 }
-echo '</table>';
+echo '</table><input type="submit" value="OK"></form>';
 ?>
 <a href="reset.php">Reset</a>
 <h2>How to play</h2>

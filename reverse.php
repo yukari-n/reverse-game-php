@@ -27,7 +27,12 @@ if(!isset($_SESSION['count'])) {
 }
 
 //文字列分解
-//str_split($str);
+$data = str_split($_POST['putted']);
+
+//置いた所を黒くする
+$map[$data[0]][$data[1]] = BLACK;
+
+
 /*
 if(!isset($_SESSION['put'])) {
 	$_SESSION['put'] = 0;
