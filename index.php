@@ -22,9 +22,9 @@ include('reverse.php');
 
 echo $_SESSION['count'].'手目';
 echo '<form action="index.php" method="post"><table>';
-for($i=1;$i<=8;++$i){
+for($i=0;$i<=8;++$i){
 	echo '<tr>';
-	for($j=1;$j<=8;++$j){
+	for($j=0;$j<=8;++$j){
 		$coord = $i.$j;
 		echo '<td>';
 		if(in_array($coord,$_SESSION['can_put'])){
