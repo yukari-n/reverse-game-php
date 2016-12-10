@@ -9,6 +9,9 @@
 <meta name="format-detection" content="telephone=no,address=no,email=no" />
 <title>under construction</title>
 <link href="https://fonts.googleapis.com/earlyaccess/sawarabigothic.css" rel="stylesheet" />
+<style>
+table{border:solid 1px #000;border-collapse:collapse}
+</style>
 </head>
 <body><?php
 echo 'under construction';
@@ -28,20 +31,21 @@ $map[4][5] = BLACK;
 $map[4][4] = WHITE;
 $map[5][5] = WHITE;
 
-echo '――――――――<br />';
+echo '<table>';
 for($i=1;$i<=8;++$i){
-	echo '|';
+	echo '<tr>';
 	for($j=1;$j<=8;++$j){
+		echo '<td>';
 		if(!isset($map[$i][$j])){
 			echo '　';
 		}
 		else{
 			echo $map[$i][$j];
 		}
-		echo '|';
+		echo '</td>';
 	}
-	echo '|<br />';
-	echo '――――――――<br />';
+	echo '</tr>';
 }
+echo '</table>';
 ?></body>
 </html>
