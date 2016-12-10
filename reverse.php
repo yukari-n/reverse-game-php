@@ -112,7 +112,8 @@ if($_SESSION['count'] > 0){
 		$do_put = null;
 		while($count < $max && !$do_put){
 			$target_id = array_rand($_SESSION['cp_can_put']);
-			$data = str_split($_SESSION['cp_can_put'][$target_id]);
+			$target = $_SESSION['cp_can_put'][$target_id];
+			$data = str_split($target);
 			echo '<p>I choose (',$data[0],',',$data[1],').</p>';
 			//ひっくり返せる場所を探す
 			$checked = 0;
@@ -140,11 +141,12 @@ if($_SESSION['count'] > 0){
 							}
 							$_SESSION['map'][$data[0]][$data[1]] = WHITE;
 							//白石リストに追加
-							array_push($_SESSION['cp_map'],$_SESSION['cp_can_put'][$target_id]);
+							array_push($_SESSION['cp_map'],$target);
 							array_push($_SESSION['cp_map'],$reverse);
 							break; //k
 						}
 						else{ //挟めなかった
+							echo '<p>I will check another direction.</p>';
 							break; //k
 						}
 					} //k
@@ -153,21 +155,24 @@ if($_SESSION['count'] > 0){
 						echo '<p>I put at (',$data[0],',',$data[1],').</p>';
 						break; //j
 					}
-					else{
-						echo '<p>I will check another direction.</p>';
-					}
 				} //j
 				if($do_put){
 					break; //i
 				}
+				else{
+					//置けない場所は削除
+					$_SESSION['cp_can_put'] = array_diff($_SESSION['cp_can_put'],array($target));
+				}
 			} //i
 			++$count;
 		}
-		echo '<p>There are ',count($_SESSION['cp_map']),' white stones.</p>';
 	}
 	if(!$do_put){
 		echo '<p>I cannot put my stone! Please continue.</p>';
 	}
+	echo '<p>There are ',count($_SESSION['cp_map']),' white stones.</p>';
+	echo '<p>I could put ',count($_SESSION['cp_can_put']),' places.</p>';
+	print_r($_SESSION['cp_can_put']);
 }
 /*
  * あとやること
