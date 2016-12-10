@@ -144,7 +144,8 @@ if($_SESSION['count'] > 0){
 		echo '<p>I could put ',$max,' places.</p>';
 		print_r($_SESSION['cp_can_put']);
 		$count = 0;
-		while($count < $max && !$do_put){
+		$do_reverse = null;
+		while($count < $max && !isset($do_reverse[0])){
 			$target_id = array_rand($_SESSION['cp_can_put']);
 			$target = $_SESSION['cp_can_put'][$target_id];
 			//置くおかないに関わらず削除
@@ -152,13 +153,14 @@ if($_SESSION['count'] > 0){
 			$data = str_split($target);
 			echo '<p>I choose (',$data[0],',',$data[1],').</p>';
 			//ひっくり返せる場所を探す
-			$_SESSION['cp_map'] = reverse_stone('W',$_SESSION['cp_map'],$target);
+			$do_reverse = reverse_stone('W',$_SESSION['cp_map'],$target);
+			$_SESSION['cp_map'] = $do_reverse[1];
 			++$count;
 		}
 	}
-	/*if(!$do_put){
+	if(!isset($do_reverse[0])){
 		echo '<p>I cannot put my stone! Please continue.</p>';
-	}*/
+	}
 	echo '<p>There are ',count($_SESSION['cp_map']),' white stones.</p>';
 	echo '<p>I could put ',count($_SESSION['cp_can_put']),' places.</p>';
 	print_r($_SESSION['cp_can_put']);

@@ -10,7 +10,7 @@ function reverse_stone($color,$stonemap,$target){
 		$you = BLACK;
 	}
 	$data = str_split($target);
-	$do_put = null; //returnしてない
+	$do_put = null;
 	$checked = 0;
 	for($i=-1;$i<2;++$i){ //横方向
 		for($j=-1;$j<2;++$j){ //縦方向
@@ -41,7 +41,7 @@ function reverse_stone($color,$stonemap,$target){
 					break; //k
 				}
 				else{ //挟めなかった
-					echo '<p>I will check another direction.</p>';
+					//echo '<p>I will check another direction.</p>';
 					break; //k
 				}
 			} //k
@@ -56,5 +56,5 @@ function reverse_stone($color,$stonemap,$target){
 		}
 	} //i
 
-	return $stonemap;
+	return array($do_put,$stonemap);
 }
