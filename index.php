@@ -66,12 +66,6 @@ if(!isset($_SESSION['cp_can_put'])) {
 	$_SESSION['cp_can_put'] = array(53,46,35,64);
 }
 
-//echo '<p>The white stones</p>';
-//print_r($_SESSION['cp_map']);
-
-//コンピューターが置ける場所
-$_SESSION['cp_can_put'] = search_can_put($_SESSION['pl_map'],$_SESSION['cp_can_put']);
-
 if($_SESSION['count'] > 0){
 	echo '<p>プレイヤーが置く前</p><table>';
 	for($j=0;$j<=8;++$j){//x,yにするため表示はiとjが逆
@@ -98,17 +92,11 @@ if($_SESSION['count'] > 0){
 	echo '</table>';
 
 	$put = $_POST['put'];
-
-	//置いた所を黒くする
-//	$_SESSION['map'][$data[0]][$data[1]] = BLACK;
-	//置ける場所から削除
-//	$_SESSION['can_put'] = array_diff($_SESSION['can_put'],array($put));
-//	$_SESSION['cp_can_put'] = array_diff($_SESSION['cp_can_put'],array($put));
-
 	//ひっくり返す
 	$do_reverse = reverse_stone('B',$put);
 	$_SESSION['pl_map'] = $do_reverse[1];
 	$_SESSION['cp_map'] = $do_reverse[2];
+	$_SESSION['pl_can_put'] = $do_reverse[3];
 	$_SESSION['cp_can_put'] = $do_reverse[4];
 
 	echo '<p>プレイヤーが置いた時点</p><table>';
@@ -135,9 +123,8 @@ if($_SESSION['count'] > 0){
 	}
 	echo '</table>';
 
-	//どこかに白石置いた所がまだ置ける状態になっているバグがある
-
-	//白が置ける場所を探索
+	//コンピューターが置ける場所を探索
+	$_SESSION['cp_can_put'] = search_can_put($_SESSION['pl_map'],$_SESSION['cp_can_put']);
 	//とりあえず無作為における場所を探す
 	$max = count($_SESSION['cp_can_put']);
 	if($max == 0 || count($_SESSION['cp_map']) == 0){
@@ -159,6 +146,7 @@ if($_SESSION['count'] > 0){
 			$do_reverse = reverse_stone('W',$target);
 			$_SESSION['cp_map'] = $do_reverse[1];
 			$_SESSION['pl_map'] = $do_reverse[2];
+			$_SESSION['cp_can_put'] = $do_reverse[3];
 			$_SESSION['pl_can_put'] = $do_reverse[4];
 			++$count;
 		}
@@ -168,6 +156,7 @@ if($_SESSION['count'] > 0){
 	}
 	echo '<p>There are ',count($_SESSION['cp_map']),' white stones.</p>';
 	echo '<p>There are ',count($_SESSION['pl_map']),' black stones.</p>';
+	//数がおかしい（少ない）
 
 	echo '<p>I could put ',count($_SESSION['cp_can_put']),' places.</p>';
 	//print_r($_SESSION['cp_can_put']);

@@ -22,10 +22,8 @@ function reverse_stone($color,$target){
 		echo '<p>You put at (',$data[0],',',$data[1],')</p>';
 	}
 	$do_put = null;
-	$checked = 0;
 	for($i=-1;$i<2;++$i){ //横方向
 		for($j=-1;$j<2;++$j){ //縦方向
-			++$checked;
 			// 隣接石が相手ではないor置いた場所はスキップ
 			if($_SESSION['map'][$data[0]+$i][$data[1]+$j] != $you || ($i == 0 && $j == 0)){
 				continue;
@@ -36,7 +34,7 @@ function reverse_stone($color,$target){
 				$y = $j * $k + $data[1];
 				$put = $x.$y;
 				if($_SESSION['map'][$x][$y] == $you){
-					++$rev_count;
+					//相手ならばひっくり返すかもリストに追加
 					array_push($reverse,$put);
 				}
 				elseif($_SESSION['map'][$x][$y] == $me){ //味方発見（隣接していない）
@@ -54,20 +52,23 @@ function reverse_stone($color,$target){
 					$you_put_map = array_diff($you_put_map,$reverse);
 					break; //k
 				}
-				else{ //挟めなかった
-					//echo '<p>I will check another direction.</p>';
+				else{ //味方は居なかった
 					break; //k
 				}
 			} //k
-			//echo '<p>I checked ',$checked,' directions.</p>';
-			if($color == 'W' && $do_put){
-				echo '<p>I put at (',$data[0],',',$data[1],').</p>';
-				//break; //j
+			if($color == 'W' && !$do_put){//挟めなかった
+				echo '<p>I will check another direction.</p>';
 			}
 		} //j
-		//if($color == 'W' && $do_put){
-		//	break; //i
-		//}
+		if($color == 'W'){
+			if($do_put){
+				echo '<p>I put at (',$data[0],',',$data[1],').</p>';
+			}
+			else{
+				echo '<p>I drop (',$data[0],',',$data[1],') from the list.</p>';
+				$me_put_map = array_diff($me_put_map,$target);
+			}
+		}
 	} //i
 
 	$me_map = array_unique($me_map);
