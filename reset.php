@@ -7,8 +7,8 @@ $_SESSION = array();
 if(isset($_COOKIE['count'])){
 	setcookie('count', '', time() - 1800, '/');
 }
-if(isset($_COOKIE['putted'])){
-	setcookie('putted', '', time() - 1800, '/');
+if(isset($_COOKIE['put'])){
+	setcookie('put', '', time() - 1800, '/');
 }
 
 session_destroy();

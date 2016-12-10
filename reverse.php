@@ -26,17 +26,18 @@ if(!isset($_SESSION['count'])) {
 	++$_SESSION['count'];
 }
 
-$putted = $_POST['putted'];
+$put = $_POST['put'];
+echo 'You put at ',$put;
 
 //文字列分解
-$data = str_split($putted);
+$data = str_split($put);
 
 //置いた所を黒くする
 $map[$data[0]][$data[1]] = BLACK;
 //置ける場所から削除
-$can_put = array_diff($can_put,$putted);
+$can_put = array_diff($can_put,array($put));
 //indexを詰める
-$can_put = array_values($can_put);
+//$can_put = array_values($can_put);
 
 
 /*
