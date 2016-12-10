@@ -26,8 +26,8 @@ for($i=0;$i<=8;++$i){
 	echo '<tr>';
 	for($j=0;$j<=8;++$j){
 		echo '<td>';
+		$coord = $i.$j;
 		if(in_array($coord,$_SESSION['can_put'])){
-			$coord = $i.$j;
 			echo '<input type="radio" name="put" value="',$coord,'">';
 		}
 		elseif(!isset($_SESSION['map'][$i][$j])){
