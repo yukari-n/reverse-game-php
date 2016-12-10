@@ -30,11 +30,11 @@ for($i=1;$i<=8;++$i){
 		if(in_array($coord,$_SESSION['can_put'])){
 			echo '<input type="radio" name="put" value="',$coord,'">';
 		}
-		elseif(!isset($map[$i][$j])){
+		elseif(!isset($_SESSION['map'][$i][$j])){
 			echo '　';
 		}
 		else{
-			echo $map[$i][$j];
+			echo $_SESSION['map'][$i][$j];
 		}
 		echo '</td>';
 	}
