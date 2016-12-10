@@ -138,8 +138,6 @@ if($_SESSION['count'] > 0){
 		while($count < $max && !isset($do_reverse[0])){
 			$target_id = array_rand($_SESSION['cp_can_put']);
 			$target = $_SESSION['cp_can_put'][$target_id];
-			//置くおかないに関わらず削除
-			$_SESSION['cp_can_put'] = array_diff($_SESSION['cp_can_put'],array($target));
 			$data = str_split($target);
 			echo '<p>I choose (',$data[0],',',$data[1],').</p>';
 			//ひっくり返せる場所を探す

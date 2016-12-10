@@ -18,6 +18,10 @@ function reverse_stone($color,$target){
 		$you_put_map = $_SESSION['pl_can_put'];
 	}
 	$data = str_split($target);
+
+	//置くおかないに関わらず削除
+	$me_put_map = array_diff($me_put_map,$target);
+
 	if($color == 'B' && $do_put){
 		echo '<p>You put at (',$data[0],',',$data[1],')</p>';
 	}
@@ -60,16 +64,15 @@ function reverse_stone($color,$target){
 				echo '<p>I will check another direction.</p>';
 			}
 		} //j
-		if($color == 'W'){
-			if($do_put){
-				echo '<p>I put at (',$data[0],',',$data[1],').</p>';
-			}
-			else{
-				echo '<p>I drop (',$data[0],',',$data[1],') from the list.</p>';
-				$me_put_map = array_diff($me_put_map,$target);
-			}
-		}
 	} //i
+	if($color == 'W'){
+		if($do_put){
+			echo '<p>I put at (',$data[0],',',$data[1],').</p>';
+		}
+		else{
+			echo '<p>I drop (',$data[0],',',$data[1],') from the list.</p>';
+		}
+	}
 
 	$me_map = array_unique($me_map);
 	$me_map = array_values($me_map);
