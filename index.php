@@ -131,8 +131,8 @@ if($_SESSION['count'] > 0){
 		echo '<p style="color:#f00;">You win!</p>';
 	}
 	else{
-		echo '<p>I could put ',$max,' places.</p>';
-		print_r($_SESSION['cp_can_put']);
+		//echo '<p>I could put ',$max,' places.</p>';
+		//print_r($_SESSION['cp_can_put']);
 		$count = 0;
 		$do_reverse = null;
 		while($count < $max && !isset($do_reverse[0])){
@@ -152,13 +152,6 @@ if($_SESSION['count'] > 0){
 	if(!isset($do_reverse[0])){
 		echo '<p>I cannot put my stone! Please continue.</p>';
 	}
-	echo '<p>There are ',count($_SESSION['cp_map']),' white stones.</p>';
-	echo '<p>There are ',count($_SESSION['pl_map']),' black stones.</p>';
-	//数がおかしい（少ない）
-
-	echo '<p>I could put ',count($_SESSION['cp_can_put']),' places.</p>';
-	//print_r($_SESSION['cp_can_put']);
-
 	//プレイヤーが置ける場所を探索
 	$_SESSION['pl_can_put'] = search_can_put($_SESSION['cp_map'],$_SESSION['pl_can_put']);
 }
@@ -171,9 +164,36 @@ if($_SESSION['count'] > 0){
  */
 
 echo $_SESSION['count'].'手目';
+
+echo '<form action="index.php" method="post">';
+
 if($_SESSION['count'] > 0 && count($_SESSION['cp_can_put']) == 0 && count($_SESSION['pl_can_put']) == 0){
+
+	echo '<p>There are ',count($_SESSION['cp_map']),' white stones.</p>';
+	echo '<p>There are ',count($_SESSION['pl_map']),' black stones.</p>';
+	//数がおかしい（少ない）
+
+	echo '<p>I could put ',count($_SESSION['cp_can_put']),' places.</p>';
+	//print_r($_SESSION['cp_can_put']);
+
+	//$black_count = count($_SESSION['pl_map']);
+	//$white_count = count($_SESSION['cp_map']);
 	$black_count = count($_SESSION['pl_map']);
 	$white_count = count($_SESSION['cp_map']);
+	for($i=-1;$i<2;++$i){ //横方向
+		for($j=-1;$j<2;++$j){ //縦方向
+			if($_SESSION['map'][$i][$j] == BLACK){
+				++$black_count;
+			}
+			elseif($_SESSION['map'][$i][$j] == WHITE){
+				++$black_count;
+			}
+		}
+	}
+
+	echo '<p>There are ',$white_count,' white stones.</p>';
+	echo '<p>There are ',count($_SESSION['pl_map']),' black stones.</p>';
+
 	if($white_count > $black_count){
 		echo '<p style="color:#00f;">I win!</p>';
 	}
@@ -185,33 +205,35 @@ if($_SESSION['count'] > 0 && count($_SESSION['cp_can_put']) == 0 && count($_SESS
 	}
 }
 else{
-	echo '<form action="index.php" method="post"><table>';
-	for($j=0;$j<=8;++$j){//x,yにするため表示はiとjが逆
-		echo '<tr>';
-		for($i=0;$i<=8;++$i){
-			echo '<td>';
-			$coord = $i.$j;
-			if($i == 0){
-				echo $j;
-			}
-			elseif($j == 0){
-				echo $i;
-			}
-			elseif(isset($_SESSION['map'][$i][$j])){
-				echo $_SESSION['map'][$i][$j];
-			}
-			elseif(in_array($coord,$_SESSION['pl_can_put'])){
-				echo '<input type="radio" name="put" value="',$coord,'">';
-			}
-			else{
-				echo '　';
-			}
-			echo '</td>';
-		}
-		echo '</tr>';
-	}
-	echo '</table><input type="submit" value="OK"></form>';
+	echo '<input type="submit" value="OK">';
 }
+
+echo '<table>';
+for($j=0;$j<=8;++$j){//x,yにするため表示はiとjが逆
+	echo '<tr>';
+	for($i=0;$i<=8;++$i){
+		echo '<td>';
+		$coord = $i.$j;
+		if($i == 0){
+			echo $j;
+		}
+		elseif($j == 0){
+			echo $i;
+		}
+		elseif(isset($_SESSION['map'][$i][$j])){
+			echo $_SESSION['map'][$i][$j];
+		}
+		elseif(in_array($coord,$_SESSION['pl_can_put'])){
+			echo '<input type="radio" name="put" value="',$coord,'">';
+		}
+		else{
+			echo '　';
+		}
+		echo '</td>';
+	}
+	echo '</tr>';
+}
+echo '</table></form>';
 ?>
 <a href="reset.php">Reset</a>
 <h2>How to play</h2>
