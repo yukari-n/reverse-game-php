@@ -18,6 +18,9 @@ function reverse_stone($color,$target){
 		$you_put_map = $_SESSION['pl_can_put'];
 	}
 	$data = str_split($target);
+	f($color == 'B' && $do_put){
+		echo '<p>You put at (',$data[0],',',$data[1],')</p>';
+	}
 	$do_put = null;
 	$checked = 0;
 	for($i=-1;$i<2;++$i){ //横方向
@@ -67,23 +70,14 @@ function reverse_stone($color,$target){
 		//}
 	} //i
 
+	$me_map = array_unique($me_map);
+	$me_map = array_values($me_map);
+	$you_map = array_unique($you_map);
+	$you_map = array_values($you_map);
+	$me_put_map = array_unique($me_put_map);
+	$me_put_map = array_values($me_put_map);
+	$you_put_map = array_unique($you_put_map);
+	$you_put_map = array_values($you_put_map);
+
 	return array($do_put,$me_map,$you_map,$me_put_map,$you_put_map);
 }
-/*
-for($i=-1;$i<2;++$i){
-	for($j=-1;$j<2;++$j){
-		// 隣接石が無い方向・隣接石が黒or置いた場所はスキップ
-		if($_SESSION['map'][$data[0]+$i][$data[1]+$j] != WHITE || ($i == 0 && $j == 0)){
-			continue;
-		}
-		for($k=1;$k<=8;++$k){
-			$x = $i * $k + $data[0];
-			$y = $j * $k + $data[1];
-			$put = $x.$y;
-			if(!isset($_SESSION['map'][$x][$y]) || $_SESSION['map'][$x][$y] == BLACK){break;}
-			$_SESSION['map'][$x][$y] = BLACK;
-			array_push($_SESSION['pl_map'],$put);
-		}
-	}
-}
-*/

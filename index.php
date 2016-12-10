@@ -66,33 +66,51 @@ if(!isset($_SESSION['cp_can_put'])) {
 	$_SESSION['cp_can_put'] = array(53,46,35,64);
 }
 
-$put = $_POST['put'];
-//文字列分解
-$data = str_split($put);
-echo '<p>You put at (',$data[0],',',$data[1],')</p>';
-
-//置いた所を黒くする
-$_SESSION['map'][$data[0]][$data[1]] = BLACK;
-//置ける場所から削除
-$_SESSION['can_put'] = array_diff($_SESSION['can_put'],array($put));
-$_SESSION['cp_can_put'] = array_diff($_SESSION['cp_can_put'],array($put));
-
-//ひっくり返す
-$do_reverse = reverse_stone('B',$put);
-$_SESSION['pl_map'] = $do_reverse[1];
-$_SESSION['cp_map'] = $do_reverse[2];
-$_SESSION['cp_can_put'] = $do_reverse[4];
-
-array_unique($_SESSION['pl_map']);
-$_SESSION['pl_map'] = array_values($_SESSION['pl_map']);
-
-echo '<p>The white stones</p>';
-print_r($_SESSION['cp_map']);
+//echo '<p>The white stones</p>';
+//print_r($_SESSION['cp_map']);
 
 //コンピューターが置ける場所
 $_SESSION['cp_can_put'] = search_can_put($_SESSION['pl_map'],$_SESSION['cp_can_put']);
 
 if($_SESSION['count'] > 0){
+	echo '<p>プレイヤーが置く前</p><table>';
+	for($j=0;$j<=8;++$j){//x,yにするため表示はiとjが逆
+		echo '<tr>';
+		for($i=0;$i<=8;++$i){
+			echo '<td>';
+			$coord = $i.$j;
+			if($i == 0){
+				echo $j;
+			}
+			elseif($j == 0){
+				echo $i;
+			}
+			elseif(!isset($_SESSION['map'][$i][$j])){
+				echo '　';
+			}
+			else{
+				echo $_SESSION['map'][$i][$j];
+			}
+			echo '</td>';
+		}
+		echo '</tr>';
+	}
+	echo '</table>';
+
+	$put = $_POST['put'];
+
+	//置いた所を黒くする
+//	$_SESSION['map'][$data[0]][$data[1]] = BLACK;
+	//置ける場所から削除
+//	$_SESSION['can_put'] = array_diff($_SESSION['can_put'],array($put));
+//	$_SESSION['cp_can_put'] = array_diff($_SESSION['cp_can_put'],array($put));
+
+	//ひっくり返す
+	$do_reverse = reverse_stone('B',$put);
+	$_SESSION['pl_map'] = $do_reverse[1];
+	$_SESSION['cp_map'] = $do_reverse[2];
+	$_SESSION['cp_can_put'] = $do_reverse[4];
+
 	echo '<p>プレイヤーが置いた時点</p><table>';
 	for($j=0;$j<=8;++$j){//x,yにするため表示はiとjが逆
 		echo '<tr>';
@@ -149,8 +167,10 @@ if($_SESSION['count'] > 0){
 		echo '<p>I cannot put my stone! Please continue.</p>';
 	}
 	echo '<p>There are ',count($_SESSION['cp_map']),' white stones.</p>';
+	echo '<p>There are ',count($_SESSION['cp_map']),' white stones.</p>';
+
 	echo '<p>I could put ',count($_SESSION['cp_can_put']),' places.</p>';
-	print_r($_SESSION['cp_can_put']);
+	//print_r($_SESSION['cp_can_put']);
 
 	//プレイヤーが置ける場所
 	$_SESSION['can_put'] = search_can_put($_SESSION['cp_map'],$_SESSION['can_put']);
