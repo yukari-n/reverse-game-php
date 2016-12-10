@@ -10,8 +10,8 @@ if(!isset($_SESSION['map'])){
 	for($i=1;$i<=8;++$i){ //[x][y]
 		for($j=1;$j<=8;$j++){
 			$_SESSION['map'][$i][$j] = null;
-			$_SESSION['map'][0][$j] = $j;
-			$_SESSION['map'][$i][0] = $i;
+			$_SESSION['map'][0][$j] = $i;
+			$_SESSION['map'][$i][0] = $j;
 		}
 	}
 	$_SESSION['map'][5][4] = BLACK;
