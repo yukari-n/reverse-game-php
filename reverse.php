@@ -18,7 +18,7 @@ function reverse_stone($color,$target){
 		$you_put_map = $_SESSION['pl_can_put'];
 	}
 	$data = str_split($target);
-	f($color == 'B' && $do_put){
+	if($color == 'B' && $do_put){
 		echo '<p>You put at (',$data[0],',',$data[1],')</p>';
 	}
 	$do_put = null;
