@@ -33,14 +33,14 @@ for($j=0;$j<=8;++$j){//x,yにするため表示はiとjが逆
 		elseif($j == 0){
 			echo $i;
 		}
+		elseif(isset($_SESSION['map'][$i][$j])){
+			echo $_SESSION['map'][$i][$j];
+		}
 		elseif(in_array($coord,$_SESSION['can_put'])){
 			echo '<input type="radio" name="put" value="',$coord,'">';
 		}
-		elseif(!isset($_SESSION['map'][$i][$j])){
-			echo '　';
-		}
 		else{
-			echo $_SESSION['map'][$i][$j];
+			echo '　';
 		}
 		echo '</td>';
 	}
