@@ -1,13 +1,21 @@
 <?php
 //ひっくり返す処理
-function reverse_stone($color,$stonemap,$target){
+function reverse_stone($color,$target){
 	if($color == 'B'){
 		$me = BLACK;
+		$me_map = $_SESSION['pl_map'];
+		$me_put_map = $_SESSION['pl_can_put'];
 		$you = WHITE;
+		$you_map = $_SESSION['cp_map'];
+		$you_put_map = $_SESSION['cp_can_put'];
 	}
 	else{
 		$me = WHITE;
+		$me_map = $_SESSION['cp_map'];
+		$me_put_map = $_SESSION['cp_can_put'];
 		$you = BLACK;
+		$you_map = $_SESSION['pl_map'];
+		$you_put_map = $_SESSION['pl_can_put'];
 	}
 	$data = str_split($target);
 	$do_put = null;
@@ -36,8 +44,11 @@ function reverse_stone($color,$stonemap,$target){
 					}
 					$_SESSION['map'][$data[0]][$data[1]] = $me;
 					//見方リストに追加
-					array_push($stonemap,$target);
-					array_push($stonemap,$reverse);
+					array_push($me_map,$target);
+					array_push($me_map,$reverse);
+					//相手リストから削除
+					$you_map = array_diff($you_map,$reverse);
+					$you_put_map = array_diff($you_put_map,$reverse);
 					break; //k
 				}
 				else{ //挟めなかった
@@ -56,5 +67,5 @@ function reverse_stone($color,$stonemap,$target){
 		}
 	} //i
 
-	return array($do_put,$stonemap);
+	return array($do_put,$me_map,$you_map,$me_put_map,$you_put_map);
 }

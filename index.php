@@ -78,25 +78,11 @@ $_SESSION['can_put'] = array_diff($_SESSION['can_put'],array($put));
 $_SESSION['cp_can_put'] = array_diff($_SESSION['cp_can_put'],array($put));
 
 //ひっくり返す
-for($i=-1;$i<2;++$i){
-	for($j=-1;$j<2;++$j){
-		// 隣接石が無い方向・隣接石が黒or置いた場所はスキップ
-		if($_SESSION['map'][$data[0]+$i][$data[1]+$j] != WHITE || ($i == 0 && $j == 0)){
-			continue;
-		}
-		for($k=1;$k<=8;++$k){
-			$x = $i * $k + $data[0];
-			$y = $j * $k + $data[1];
-			$put = $x.$y;
-			if(!isset($_SESSION['map'][$x][$y]) || $_SESSION['map'][$x][$y] == BLACK){break;}
-			$_SESSION['map'][$x][$y] = BLACK;
-			array_push($_SESSION['pl_map'],$put);
-			//白石リストから削除
-			$_SESSION['cp_map'] = array_diff($_SESSION['cp_map'],array($put));
-			$_SESSION['cp_can_put'] = array_diff($_SESSION['cp_can_put'],array($put));
-		}
-	}
-}
+$do_reverse = reverse_stone('B',$put);
+$_SESSION['pl_map'] = $do_reverse[1];
+$_SESSION['cp_map'] = $do_reverse[2];
+$_SESSION['cp_can_put'] = $do_reverse[4];
+
 array_unique($_SESSION['pl_map']);
 $_SESSION['pl_map'] = array_values($_SESSION['pl_map']);
 
@@ -132,7 +118,6 @@ if($_SESSION['count'] > 0){
 	echo '</table>';
 
 	//どこかに白石置いた所がまだ置ける状態になっているバグがある
-	//上の処理と被るので関数化すること
 
 	//白が置ける場所を探索
 	//とりあえず無作為における場所を探す
@@ -153,8 +138,10 @@ if($_SESSION['count'] > 0){
 			$data = str_split($target);
 			echo '<p>I choose (',$data[0],',',$data[1],').</p>';
 			//ひっくり返せる場所を探す
-			$do_reverse = reverse_stone('W',$_SESSION['cp_map'],$target);
+			$do_reverse = reverse_stone('W',$target);
 			$_SESSION['cp_map'] = $do_reverse[1];
+			$_SESSION['pl_map'] = $do_reverse[2];
+			$_SESSION['pl_can_put'] = $do_reverse[4];
 			++$count;
 		}
 	}
