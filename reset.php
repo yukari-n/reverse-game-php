@@ -1,5 +1,6 @@
 <?php
-//上手く動いてない
+session_start();
+
 print_r($_SESSION);
 $_SESSION = array();
 
