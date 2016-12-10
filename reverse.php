@@ -157,7 +157,9 @@ if($_SESSION['count'] > 0){
 						echo '<p>I will check another direction.</p>';
 					}
 				} //j
-				if($do_put){break; //i}
+				if($do_put){
+					break; //i
+				}
 			} //i
 			++$count;
 		}
