@@ -171,12 +171,17 @@ if($_SESSION['count'] > 0){
  */
 
 echo $_SESSION['count'].'手目';
-if(count($_SESSION['cp_can_put']) == 0 && count($_SESSION['pl_can_put']) == 0){
-	if(count($_SESSION['cp_map']) > count($_SESSION['pl_map'])){
-		echo '<p style="color:#f00;">I win!</p>';
+if($_SESSION['count'] > 0 && count($_SESSION['cp_can_put']) == 0 && count($_SESSION['pl_can_put']) == 0){
+	$black_count = count($_SESSION['pl_map']);
+	$white_count = count($_SESSION['cp_map']);
+	if($white_count > $black_count){
+		echo '<p style="color:#00f;">I win!</p>';
+	}
+	elseif($white_count < $black_count){
+		echo '<p style="color:#f00;">You win!</p>';
 	}
 	else{
-		echo '<p style="color:#f00;">You win!</p>';
+		echo '<p style="color:#f0f;">Draw!</p>';
 	}
 }
 else{
