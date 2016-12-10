@@ -19,7 +19,7 @@ function reverse_stone($color,$target){
 	}
 	$data = str_split($target);
 
-	if($color == 'B' && $do_put){
+	if($color == 'B'){
 		echo '<p>You put at (',$data[0],',',$data[1],')</p>';
 	}
 	$do_put = null;
@@ -50,6 +50,7 @@ function reverse_stone($color,$target){
 					array_push($me_map,$reverse);
 					//相手リストから削除
 					$you_map = array_diff($you_map,$reverse);
+					$you_put_map = array_diff($you_put_map,array($target));
 					$you_put_map = array_diff($you_put_map,$reverse);
 					break; //k
 				}
@@ -72,7 +73,7 @@ function reverse_stone($color,$target){
 	}
 	//置くおかないに関わらず削除
 	$me_put_map = array_diff($me_put_map,array($target));
-	print_r($me_put_map);
+	//print_r($me_put_map);
 
 	$me_map = array_unique($me_map);
 	$me_map = array_values($me_map);
