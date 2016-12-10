@@ -58,9 +58,9 @@ function reverse_stone($color,$target){
 					break; //k
 				}
 			} //k
-			if($color == 'W' && !$do_put){//挟めなかった
+			/*if($color == 'W' && !$do_put){//挟めなかった
 				echo '<p>I will check another direction.</p>';
-			}
+			}*/
 		} //j
 	} //i
 	if($color == 'W'){

@@ -58,8 +58,8 @@ if(!isset($_SESSION['count'])){
 }
 
 //黒が置ける場所の初期値
-if(!isset($_SESSION['can_put'])){
-	$_SESSION['can_put'] = array(43,34,65,56);
+if(!isset($_SESSION['pl_can_put'])){
+	$_SESSION['pl_can_put'] = array(43,34,65,56);
 }
 //白が置ける場所の初期値
 if(!isset($_SESSION['cp_can_put'])) {
@@ -159,8 +159,8 @@ if($_SESSION['count'] > 0){
 	echo '<p>I could put ',count($_SESSION['cp_can_put']),' places.</p>';
 	//print_r($_SESSION['cp_can_put']);
 
-	//プレイヤーが置ける場所
-	$_SESSION['can_put'] = search_can_put($_SESSION['cp_map'],$_SESSION['can_put']);
+	//プレイヤーが置ける場所を探索
+	$_SESSION['pl_can_put'] = search_can_put($_SESSION['cp_map'],$_SESSION['pl_can_put']);
 }
 /*
  * あとやること
@@ -200,7 +200,7 @@ else{
 			elseif(isset($_SESSION['map'][$i][$j])){
 				echo $_SESSION['map'][$i][$j];
 			}
-			elseif(in_array($coord,$_SESSION['can_put'])){
+			elseif(in_array($coord,$_SESSION['pl_can_put'])){
 				echo '<input type="radio" name="put" value="',$coord,'">';
 			}
 			else{
