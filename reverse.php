@@ -74,9 +74,7 @@ for($i=-1;$i<2;++$i){
 		}
 	}
 }
-//indexを詰める（念のため）
-$_SESSION['can_put'] = array_values($_SESSION['can_put']);
-$_SESSION['cp_can_put'] = array_values($_SESSION['cp_can_put']);
+
 echo '<p>The white stones</p>';
 print_r($_SESSION['cp_map']);
 
@@ -121,6 +119,8 @@ if($_SESSION['count'] > 0){
 		while($count < $max && !$do_put){
 			$target_id = array_rand($_SESSION['cp_can_put']);
 			$target = $_SESSION['cp_can_put'][$target_id];
+			//置くおかないに関わらず削除
+			$_SESSION['cp_can_put'] = array_diff($_SESSION['cp_can_put'],array($target));
 			$data = str_split($target);
 			echo '<p>I choose (',$data[0],',',$data[1],').</p>';
 			//ひっくり返せる場所を探す
@@ -167,10 +167,6 @@ if($_SESSION['count'] > 0){
 				if($do_put){
 					break; //i
 				}
-				else{
-					//置けない場所は削除
-					$_SESSION['cp_can_put'] = array_diff($_SESSION['cp_can_put'],array($target));
-				}
 			} //i
 			++$count;
 		}
@@ -184,7 +180,7 @@ if($_SESSION['count'] > 0){
 
 	//置ける場所の追加
 	//プレイヤーが置ける場所
-	search_can_put($_SESSION['cp_map'],$_SESSION['can_put']);
+	$_SESSION['can_put'] = search_can_put($_SESSION['cp_map'],$_SESSION['can_put']);
 }
 /*
  * あとやること
