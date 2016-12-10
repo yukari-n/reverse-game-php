@@ -72,19 +72,43 @@ $_SESSION['cp_can_put'] = array_values($_SESSION['cp_can_put']);
 echo '<p>The white stones</p>';
 print_r($_SESSION['cp_map']);
 
+
+echo '<p>プレイヤーが置いた時点</p><table>';
+for($j=0;$j<=8;++$j){//x,yにするため表示はiとjが逆
+	echo '<tr>';
+	for($i=0;$i<=8;++$i){
+		echo '<td>';
+		$coord = $i.$j;
+		if($i == 0){
+			echo $j;
+		}
+		elseif($j == 0){
+			echo $i;
+		}
+		elseif(!isset($_SESSION['map'][$i][$j])){
+			echo '　';
+		}
+		else{
+			echo $_SESSION['map'][$i][$j];
+		}
+		echo '</td>';
+	}
+	echo '</tr>';
+}
+echo '</table>';
+
 if($_SESSION['count'] > 0){
 	//白が置ける場所を探索
 	//とりあえず無作為における場所を探す
 	$max = count($_SESSION['cp_can_put']);
 	if($max == 0 || count($_SESSION['cp_map']) == 0){
-		echo '<p>You win!</p>';
+		echo '<p style="color:#f00;">You win!</p>';
 	}
 	else{
 		echo '<p>I could put ',$max,' places.</p>';
 		print_r($_SESSION['cp_can_put']);
 		$count = 0;
 		$do_put = null;
-		$rev_count = 0;
 		while($count < $max && !$do_put){
 			$target_id = array_rand($_SESSION['cp_can_put']);
 			$data = str_split($_SESSION['cp_can_put'][$target_id]);
@@ -95,6 +119,7 @@ if($_SESSION['count'] > 0){
 				for($j=-1;$j<2;++$j){ //縦方向
 					if(!isset($_SESSION['map'][$data[0]+$i][$data[1]+$j]) || ($i == 0 && $j == 0)){continue;}
 					$reverse = array(); //ひっくり返すかもしれないもの
+					$rev_count = 0;
 					for($k=1;$k<=8;++$k){
 						$x = $i * $k + $data[0];
 						$y = $j * $k + $data[1];
