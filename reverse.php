@@ -59,12 +59,12 @@ function reverse_stone($color,$target){
 			//echo '<p>I checked ',$checked,' directions.</p>';
 			if($color == 'W' && $do_put){
 				echo '<p>I put at (',$data[0],',',$data[1],').</p>';
-				break; //j
+				//break; //j
 			}
 		} //j
-		if($color == 'W' && $do_put){
-			break; //i
-		}
+		//if($color == 'W' && $do_put){
+		//	break; //i
+		//}
 	} //i
 
 	return array($do_put,$me_map,$you_map,$me_put_map,$you_put_map);
