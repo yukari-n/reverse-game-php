@@ -11,26 +11,15 @@
 <link href="https://fonts.googleapis.com/earlyaccess/sawarabigothic.css" rel="stylesheet" />
 <style>
 table{border:solid 1px #000;border-collapse:collapse}
+td{border:solid 1px #000}
 </style>
 </head>
 <body><?php
-echo 'under construction';
+echo '<h1>under construction</h1>';
 
-define('BLACK',"&#x25cf;");
-define('WHITE',"&#x25cb;");
+include('reverse.php');
 
-//初期化
-$map = array();
-for($i=1;$i<=8;++$i){ //[x][y]
-	for($j=1;$j<=8;$j++){
-		$map[$i][$j] = null;
-	}
-}
-$map[5][4] = BLACK;
-$map[4][5] = BLACK;
-$map[4][4] = WHITE;
-$map[5][5] = WHITE;
-
+echo $_SESSION['count'].'手目';
 echo '<table>';
 for($i=1;$i<=8;++$i){
 	echo '<tr>';
@@ -47,5 +36,9 @@ for($i=1;$i<=8;++$i){
 	echo '</tr>';
 }
 echo '</table>';
-?></body>
+?>
+<a href="reset.php">Reset</a>
+<h2>How to play</h2>
+<p>You are BLACK.</p>
+</body>
 </html>
