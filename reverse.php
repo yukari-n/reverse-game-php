@@ -68,15 +68,21 @@ for($i=-1;$i<2;++$i){
 			$put = $x.$y;
 			if(!isset($_SESSION['map'][$x][$y]) || $_SESSION['map'][$x][$y] == BLACK){break;}
 			$_SESSION['map'][$x][$y] = BLACK;
+			array_push($_SESSION['pl_map'],$put);
 			//白石リストから削除
 			$_SESSION['cp_map'] = array_diff($_SESSION['cp_map'],array($put));
 			$_SESSION['cp_can_put'] = array_diff($_SESSION['cp_can_put'],array($put));
 		}
 	}
 }
+array_unique($_SESSION['pl_map']);
+$_SESSION['pl_map'] = array_values($_SESSION['pl_map']);
 
 echo '<p>The white stones</p>';
 print_r($_SESSION['cp_map']);
+
+//コンピューターが置ける場所
+$_SESSION['cp_can_put'] = search_can_put($_SESSION['pl_map'],$_SESSION['cp_can_put']);
 
 if($_SESSION['count'] > 0){
 	echo '<p>プレイヤーが置いた時点</p><table>';
@@ -178,7 +184,6 @@ if($_SESSION['count'] > 0){
 	echo '<p>I could put ',count($_SESSION['cp_can_put']),' places.</p>';
 	print_r($_SESSION['cp_can_put']);
 
-	//置ける場所の追加
 	//プレイヤーが置ける場所
 	$_SESSION['can_put'] = search_can_put($_SESSION['cp_map'],$_SESSION['can_put']);
 }

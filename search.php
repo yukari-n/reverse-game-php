@@ -1,4 +1,5 @@
 <?php
+//置ける場所の追加
 function search_can_put($map,$putmap){
 	foreach($map as $coord){
 		$stone = str_split($coord);
