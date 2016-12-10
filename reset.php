@@ -1,7 +1,10 @@
 <?php
-//session_destroy();
+print_r($_SESSION);
 $_SESSION = array();
+session_destroy();
 
-echo 'Data was deleted.<br />';
+echo '<p>Data was deleted.</p>';
 
-echo '<a href="/">Back</a>';
+print_r($_SESSION);
+
+echo '<p><a href="/">Back</a></p>';
