@@ -14,7 +14,7 @@ function search_can_put($map,$putmap){
 			}
 		}
 	}
-	array_unique($putmap);
+	$putmap = array_unique($putmap);
 	$putmap = array_values($putmap);
 
 	return $putmap;
