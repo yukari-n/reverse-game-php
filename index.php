@@ -22,9 +22,9 @@ include('reverse.php');
 
 echo $_SESSION['count'].'手目';
 echo '<form action="index.php" method="post"><table>';
-for($i=0;$i<=8;++$i){
+for($j=0;$j<=8;++$j){//x,yにするため表示はiとjが逆
 	echo '<tr>';
-	for($j=0;$j<=8;++$j){
+	for($i=0;$i<=8;++$i){
 		echo '<td>';
 		$coord = $i.$j;
 		if($i == 0){
