@@ -16,13 +16,15 @@ $map[4][5] = BLACK;
 $map[4][4] = WHITE;
 $map[5][5] = WHITE;
 
-//黒が置ける場所の初期値
-$can_put = array(43,34,65,56);
-
 if(!isset($_SESSION['count'])) {
 	$_SESSION['count'] = 0;
 }else{
 	++$_SESSION['count'];
+}
+
+//黒が置ける場所の初期値
+if(!isset($_SESSION['can_put'])) {
+	$_SESSION['can_put'] = array(43,34,65,56);
 }
 
 $put = $_POST['put'];
@@ -46,16 +48,10 @@ for($i=-1;$i<2;++$i){
 	}
 }
 
-
-
-
-
-
-
 //置ける場所から削除
-$can_put = array_diff($can_put,array($put));
+$_SESSION['can_put'] = array_diff($_SESSION['can_put'],array($put));
 //indexを詰める
-//$can_put = array_values($can_put);
+$_SESSION['can_put'] = array_values($_SESSION['can_put']);
 
 
 /*
