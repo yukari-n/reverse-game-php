@@ -2,6 +2,6 @@ body{font-family:"Sawarabi Gothic"}
 table{border:solid 1px #000;border-collapse:collapse;background-color:#900}
 td{border:solid 1px #ccc;text-align:center;vertical-align:middle;width:1em}
 .white{color:#fff}
-input{display:none}
+input[type="radio"]{display:none}
 label{color:#eee}
 input[type="radio"]:checked + .selected{color:#000}
