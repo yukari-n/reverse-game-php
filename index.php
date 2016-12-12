@@ -71,10 +71,10 @@ if($_SESSION['count'] > 0){
 			echo '<td>';
 			$coord = $i.$j;
 			if($i == 0){
-				echo $j;
+				echo '<span class="white">',$j,'</span>';
 			}
 			elseif($j == 0){
-				echo $i;
+				echo '<span class="white">',$i,'</span>';
 			}
 			elseif(!isset($_SESSION['map'][$i][$j])){
 				echo '　';
