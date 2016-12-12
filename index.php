@@ -7,12 +7,13 @@
 <meta http-equiv="imagetoolbar" content="no" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta name="format-detection" content="telephone=no,address=no,email=no" />
-<title>under construction</title>
+<title>はさんでひっくりかえすやつ</title>
 <link href="https://fonts.googleapis.com/earlyaccess/sawarabigothic.css" rel="stylesheet" />
 <link href="style.css" rel="stylesheet" />
 </head>
 <body>
-<h1>under construction</h1>
+<h1>はさんでひっくりかえすやつ</h1>
+<p>注意：制作中の為、正しく遊べない場合があります。</p>
 <?php
 define('BLACK','&#x25cf;');
 define('WHITE','<span class="white">&#x25cf;</span>');//&#x25cb;
@@ -59,6 +60,7 @@ if(!isset($_SESSION['cp_can_put'])) {
 
 if(!isset($_SESSION['count'])){
 	$_SESSION['count'] = 0;
+	echo '<p>(・ω・)はさんでひっくりかえすやつしよー</p>';
 }
 else{ //if($_POST['put'])
 	++$_SESSION['count'];
@@ -233,8 +235,13 @@ for($j=0;$j<=8;++$j){//x,yにするため表示はiとjが逆
 }
 echo '</table></form>';
 ?>
-<a href="reset.php">Reset</a>
-<h2>How to play</h2>
-<p>You are BLACK.</p>
+<h2>遊び方</h2>
+<p>(・ω・)黒が先手で相手を上下左右斜めにはさむよ</p>
+<p>(・ω・)ぼくが白でいいよ</p>
+<p>(・ω・)グレーの&#x25a0;から石を置く所を選んでね<br />
+　このゲームは制作中なので、石をはさめない所も選べるようになっているから注意してね<br />
+　正しくはさめる所に置いていけば最後まで遊べるよ</p>
+<p>(´・ω・｀)あとぼく石を数えるのが苦手なんだ…　（作者注※最終結果のカウントに不具合があります）</p>
+<p><a href="reset.php">Reset</a></p>
 </body>
 </html>
