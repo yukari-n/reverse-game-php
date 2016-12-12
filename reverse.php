@@ -65,10 +65,15 @@ function reverse_stone($color,$target){
 	} //i
 	if($color == 'W'){
 		if($do_put){
-			echo '<p>I put at (',$data[0],',',$data[1],').</p>';
+			echo '<p>(・ω・)ぼくは(',$data[0],',',$data[1],')に置いたよ</p>';
 		}
 		else{
-			echo '<p>I drop (',$data[0],',',$data[1],') from the list.</p>';
+			echo '<p>(´・ω・｀) (',$data[0],',',$data[1],')には置けないみたいだね</p>';
+		}
+	}
+	else{
+		if(!$do_put){
+			echo '<p>(・ω・) (',$data[0],',',$data[1],')には置けないよ<br />　パス扱いにするね</p>';
 		}
 	}
 	//置くおかないに関わらず削除
