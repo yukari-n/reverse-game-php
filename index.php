@@ -48,12 +48,6 @@ if(!isset($_SESSION['cp_map'])){
 	}
 }
 
-if(!isset($_SESSION['count'])){
-	$_SESSION['count'] = 0;
-}else{
-	++$_SESSION['count'];
-}
-
 //黒が置ける場所の初期値
 if(!isset($_SESSION['pl_can_put'])){
 	$_SESSION['pl_can_put'] = array(43,34,65,56);
@@ -63,7 +57,10 @@ if(!isset($_SESSION['cp_can_put'])) {
 	$_SESSION['cp_can_put'] = array(53,46,35,64);
 }
 
-if($_SESSION['count'] > 0){
+if(!isset($_SESSION['count'])){
+	$_SESSION['count'] = 0;
+}
+elseif($_POST['put'] && $_SESSION['count'] > 0){
 	echo '<p>プレイヤーが置く前</p><table>';
 	for($j=0;$j<=8;++$j){//x,yにするため表示はiとjが逆
 		echo '<tr>';
@@ -212,16 +209,16 @@ for($j=0;$j<=8;++$j){//x,yにするため表示はiとjが逆
 		echo '<td>';
 		$coord = $i.$j;
 		if($i == 0){
-			echo $j;
+			echo '<span class="white">',$j,'</span>';
 		}
 		elseif($j == 0){
-			echo $i;
+			echo '<span class="white">',$i,'</span>';
 		}
 		elseif(isset($_SESSION['map'][$i][$j])){
 			echo $_SESSION['map'][$i][$j];
 		}
 		elseif(in_array($coord,$_SESSION['pl_can_put'])){
-			echo '<input type="radio" name="put" value="',$coord,'">';
+			echo '<input type="radio" id="',$coord,'" name="put" value="',$coord,'"><label for="',$coord,'" class="selected">&#x25a0;</label>';
 		}
 		else{
 			echo '　';
