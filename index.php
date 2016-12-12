@@ -60,7 +60,7 @@ if(!isset($_SESSION['cp_can_put'])) {
 if(!isset($_SESSION['count'])){
 	$_SESSION['count'] = 0;
 }
-elseif($_POST['put']){
+else{ //if($_POST['put'])
 	++$_SESSION['count'];
 }
 
