@@ -60,7 +60,8 @@ if(!isset($_SESSION['cp_can_put'])) {
 if(!isset($_SESSION['count'])){
 	$_SESSION['count'] = 0;
 }
-elseif($_POST['put'] && $_SESSION['count'] > 0){
+
+if($_SESSION['count'] > 0){
 	echo '<p>プレイヤーが置く前</p><table>';
 	for($j=0;$j<=8;++$j){//x,yにするため表示はiとjが逆
 		echo '<tr>';
