@@ -9,16 +9,13 @@
 <meta name="format-detection" content="telephone=no,address=no,email=no" />
 <title>under construction</title>
 <link href="https://fonts.googleapis.com/earlyaccess/sawarabigothic.css" rel="stylesheet" />
-<style>
-table{border:solid 1px #000;border-collapse:collapse}
-td{border:solid 1px #000;text-align:center;vertical-align:middle}
-</style>
+<link href="style.css" rel="stylesheet" />
 </head>
 <body>
 <h1>under construction</h1>
 <?php
-define('BLACK',"&#x25cf;");
-define('WHITE',"&#x25cb;");
+define('BLACK','&#x25cf;');
+define('WHITE','<span class="white">&#x25cf;</span>');//&#x25cb;
 
 session_start();
 
