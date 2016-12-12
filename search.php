@@ -1,6 +1,7 @@
 <?php
 //置ける場所の追加
 function search_can_put($map,$putmap){
+	$putmap = array();
 	foreach($map as $coord){
 		$stone = str_split($coord);
 		for($i=-1;$i<=1;++$i){ //横方向
