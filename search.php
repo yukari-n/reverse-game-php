@@ -8,8 +8,23 @@
  * 置けない場所を追加しないシステムが必要
  */
 
-function search_can_put($map,$putmap){
-	$putmap = array();
+function search_can_put($map /* 相手の石マップ */  ,$putmap /* 置ける場所マップ */){
+	//$putmap = array();
+	foreach($putmap as $coord){
+		$count = 0;
+		for($i=-1;$i<=1;++$i){ //横方向
+			for($j=-1;$j<=1;++$j){ //縦方向
+				if($i == 0 && $j == 0){continue;}
+				$tonari = $coord + (10 * $i) + $j;
+				if(!in_array($tonari,$map)){
+					++$count; //隣が敵石ではない数を数える
+				}
+			}
+		}
+		if($count == 8){
+			$putmap = array_diff($putmap,array($coord));
+		}
+	}
 	foreach($map as $coord){
 		$stone = str_split($coord);
 		for($i=-1;$i<=1;++$i){ //横方向
@@ -26,6 +41,7 @@ function search_can_put($map,$putmap){
 		}
 	}
 	//念のため
+	$putmap = array_diff($putmap,array(00));
 	$putmap = array_diff($putmap,$_SESSION['cp_map']);
 	$putmap = array_diff($putmap,$_SESSION['pl_map']);
 	$putmap = array_unique($putmap);
