@@ -15,7 +15,7 @@
 <h1>はさんでひっくりかえすやつ</h1><?php
 session_start();
 
-/print_r($_SESSION);
+//print_r($_SESSION);
 $_SESSION = array();
 
 if(isset($_COOKIE['count'])){
