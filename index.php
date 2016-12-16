@@ -92,36 +92,40 @@ if($_SESSION['count'] > 0){
 	echo '</table>';
 
 	$put = $_POST['put'];
-	//ひっくり返す
-	$do_reverse = reverse_stone('B',$put);
-	$_SESSION['pl_map'] = $do_reverse[1];
-	$_SESSION['cp_map'] = $do_reverse[2];
-	$_SESSION['pl_can_put'] = $do_reverse[3];
-	$_SESSION['cp_can_put'] = $do_reverse[4];
-
-	echo '<p>プレイヤーが置いた時点</p><table>';
-	for($j=0;$j<=8;++$j){//x,yにするため表示はiとjが逆
-		echo '<tr>';
-		for($i=0;$i<=8;++$i){
-			echo '<td>';
-			$coord = $i.$j;
-			if($i == 0){
-				echo '<span class="white">',$j,'</span>';
-			}
-			elseif($j == 0){
-				echo '<span class="white">',$i,'</span>';
-			}
-			elseif(!isset($_SESSION['map'][$i][$j])){
-				echo '　';
-			}
-			else{
-				echo $_SESSION['map'][$i][$j];
-			}
-			echo '</td>';
-		}
-		echo '</tr>';
+	if($put == 'pass'){
+		echo '<p>(・ω・)パスするの？</p>';
 	}
-	echo '</table>';
+	else{//ひっくり返す
+		$do_reverse = reverse_stone('B',$put);
+		$_SESSION['pl_map'] = $do_reverse[1];
+		$_SESSION['cp_map'] = $do_reverse[2];
+		$_SESSION['pl_can_put'] = $do_reverse[3];
+		$_SESSION['cp_can_put'] = $do_reverse[4];
+
+		echo '<p>プレイヤーが置いた時点</p><table>';
+		for($j=0;$j<=8;++$j){//x,yにするため表示はiとjが逆
+			echo '<tr>';
+			for($i=0;$i<=8;++$i){
+				echo '<td>';
+				$coord = $i.$j;
+				if($i == 0){
+					echo '<span class="white">',$j,'</span>';
+				}
+				elseif($j == 0){
+					echo '<span class="white">',$i,'</span>';
+				}
+				elseif(!isset($_SESSION['map'][$i][$j])){
+					echo '　';
+				}
+				else{
+					echo $_SESSION['map'][$i][$j];
+				}
+				echo '</td>';
+			}
+			echo '</tr>';
+		}
+		echo '</table>';
+	}
 
 	//コンピューターが置ける場所を探索
 	$_SESSION['cp_can_put'] = search_can_put($_SESSION['pl_map'],$_SESSION['cp_can_put']);
@@ -205,7 +209,7 @@ if($_SESSION['count'] > 0 && count($_SESSION['cp_can_put']) == 0 && count($_SESS
 	}
 }
 else{
-	echo '<input type="submit" value="OK">';
+	echo '<input type="submit" value="OK"><input type="radio" id="pass" name="put" value="pass"><label for="',$coord,'" class="selected">パス</label>';
 }
 
 echo '<table>';
