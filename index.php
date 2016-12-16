@@ -171,7 +171,7 @@ echo $_SESSION['count'].'手目';
 
 echo '<form action="index.php" method="post">';
 
-if($_SESSION['count'] > 0 && count($_SESSION['cp_can_put']) == 0 && count($_SESSION['pl_can_put']) == 0){
+if($_SESSION['count'] > 0 && count($_SESSION['cp_can_put']) == 0 && count($_SESSION['pl_can_put']) == 0 || count($_SESSION['cp_map']) == 0 || count($_SESSION['pl_map']) == 0){
 
 	echo '<p>There are ',count($_SESSION['cp_map']),' white stones.</p>';
 	echo '<p>There are ',count($_SESSION['pl_map']),' black stones.</p>';
