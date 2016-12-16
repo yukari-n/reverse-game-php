@@ -131,10 +131,10 @@ if($_SESSION['count'] > 0){
 	$_SESSION['cp_can_put'] = search_can_put($_SESSION['pl_map'],$_SESSION['cp_can_put']);
 	//とりあえず無作為における場所を探す
 	$max = count($_SESSION['cp_can_put']);
-	if($max == 0 || count($_SESSION['cp_map']) == 0){
+	/* if($max == 0 || count($_SESSION['cp_map']) == 0){
 		echo '<p style="color:#f00;">You win!</p>';
 	}
-	else{
+	else{ */
 		//echo '<p>I could put ',$max,' places.</p>';
 		//print_r($_SESSION['cp_can_put']);
 		$count = 0;
@@ -152,7 +152,7 @@ if($_SESSION['count'] > 0){
 			$_SESSION['pl_can_put'] = $do_reverse[4];
 			++$count;
 		}
-	}
+	//}
 	if(!isset($do_reverse[0])){
 		echo '<p>I cannot put my stone! Please continue.</p>';
 	}
