@@ -4,4 +4,5 @@ td{border:solid 1px #ccc;text-align:center;vertical-align:middle;width:2em;heigh
 .white{color:#fff}
 input[type="radio"]{display:none}
 label,.gray{color:#aaa}
+.pass{font-weight:bold}
 input[type="radio"]:checked + .selected{color:#000}

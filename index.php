@@ -209,7 +209,7 @@ if($_SESSION['count'] > 0 && count($_SESSION['cp_can_put']) == 0 && count($_SESS
 	}
 }
 else{
-	echo '<input type="submit" value="OK"><input type="radio" id="pass" name="put" value="pass"><label for="',$coord,'" class="selected">パス</label>';
+	echo '<input type="submit" value="OK"> <input type="radio" id="pass" name="put" value="pass"><label for="pass" class="selected pass">&#x25a0; パス</label>';
 }
 
 echo '<table>';
