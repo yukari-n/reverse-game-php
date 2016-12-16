@@ -42,8 +42,8 @@ function search_can_put($map /* 相手の石マップ */  ,$putmap /* 置ける�
 	}
 	//念のため
 	$putmap = array_diff($putmap,array(00));
-	$putmap = array_diff($putmap,$_SESSION['cp_map']);
-	$putmap = array_diff($putmap,$_SESSION['pl_map']);
+	//$putmap = array_diff($putmap,$_SESSION['cp_map']);
+	//$putmap = array_diff($putmap,$_SESSION['pl_map']);
 	$putmap = array_unique($putmap);
 	$putmap = array_values($putmap);
 
