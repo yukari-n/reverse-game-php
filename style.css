@@ -3,5 +3,5 @@ table{border:solid 1px #000;border-collapse:collapse;background-color:#900}
 td{border:solid 1px #ccc;text-align:center;vertical-align:middle;width:2em;height:2em}
 .white{color:#fff}
 input[type="radio"]{display:none}
-label{color:#aaa}
+label,.gray{color:#aaa}
 input[type="radio"]:checked + .selected{color:#000}
