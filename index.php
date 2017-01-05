@@ -19,6 +19,7 @@ session_start();
 
 require_once('reverse.php');
 require_once('search.php');
+require_once('debug.php');
 
 if(!isset($_SESSION['count'])){
 	$_SESSION['count'] = 0;
@@ -30,29 +31,7 @@ else{ //if($_POST['put'])
 
 echo '<div style="display:inline;">';
 if($_SESSION['count'] > 0){
-	echo '<p>プレイヤーが置く前</p><table>';
-	for($j=0;$j<=8;++$j){//x,yにするため表示はiとjが逆
-		echo '<tr>';
-		for($i=0;$i<=8;++$i){
-			echo '<td>';
-			$coord = $i.$j;
-			if($i == 0){
-				echo '<span class="white">',$j,'</span>';
-			}
-			elseif($j == 0){
-				echo '<span class="white">',$i,'</span>';
-			}
-			elseif(!isset($_SESSION['map'][$i][$j])){
-				echo '　';
-			}
-			else{
-				echo $_SESSION['map'][$i][$j];
-			}
-			echo '</td>';
-		}
-		echo '</tr>';
-	}
-	echo '</table>';
+	echo before_put();
 
 	$put = $_POST['put'];
 	if($put == 'pass'){
@@ -176,6 +155,7 @@ echo '</table></form>';
 <p>(・ω・)ぼくが白でいいよ</p>
 <p>(・ω・)グレーの<span class="gray">&#x25a0;</span>から石を置く所を選んでね<br />
 　このゲームは制作中なので、石をはさめない所も選べるようになっているから注意してね</p>
+<p>(・ω・)ページを更新するとパス扱いになるよ</p>
 <p>(´・ω・｀)あとぼく石を数えるのが苦手なんだ…　（作者注※最終結果のカウントに不具合があります）</p>
 <p><a href="reset.php">Reset</a></p>
 </body>
