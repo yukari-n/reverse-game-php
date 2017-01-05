@@ -37,6 +37,7 @@ if($_SESSION['count'] > 0){
 	}
 	else{//ひっくり返す
 		$do_reverse = reverse_stone('B',$put);
+		$prev_put = $put;
 		$_SESSION['pl_map'] = $do_reverse[1];
 		$_SESSION['cp_map'] = $do_reverse[2];
 		$_SESSION['pl_can_put'] = $do_reverse[3];
@@ -98,7 +99,6 @@ if($_SESSION['count'] > 0){
 	}
 	//プレイヤーが置ける場所を探索
 	$_SESSION['pl_can_put'] = search_can_put($_SESSION['cp_map'],$_SESSION['pl_can_put']);
-	$prev_put = $put;
 }
 
 /*
