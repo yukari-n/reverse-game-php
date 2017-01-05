@@ -1,4 +1,43 @@
 <?php
+//石
+define('BLACK','&#x25cf;');
+define('WHITE','<span class="white">&#x25cf;</span>');//&#x25cb;
+
+//初期化
+if(!isset($_SESSION['map'])){
+	$_SESSION['map'] = array();
+	for($i=1;$i<=8;++$i){ //[x][y]
+		for($j=1;$j<=8;$j++){
+			$_SESSION['map'][$i][$j] = null;
+		}
+	}
+}
+//黒の初期位置
+if(!isset($_SESSION['pl_map'])){
+	$_SESSION['pl_map'] = array(54,45);
+	foreach($_SESSION['pl_map'] as $pl){
+		$data = str_split($pl);
+		$_SESSION['map'][$data[0]][$data[1]] = BLACK;
+	}
+}
+//白の初期位置
+if(!isset($_SESSION['cp_map'])){
+	$_SESSION['cp_map'] = array(44,55);
+	foreach($_SESSION['cp_map'] as $cp){
+		$data = str_split($cp);
+		$_SESSION['map'][$data[0]][$data[1]] = WHITE;
+	}
+}
+
+//黒が置ける場所の初期値
+if(!isset($_SESSION['pl_can_put'])){
+	$_SESSION['pl_can_put'] = array(43,34,65,56);
+}
+//白が置ける場所の初期値
+if(!isset($_SESSION['cp_can_put'])) {
+	$_SESSION['cp_can_put'] = array(53,46,35,64);
+}
+
 //ひっくり返す処理
 function reverse_stone($color,$target){
 	if($color == 'B'){
