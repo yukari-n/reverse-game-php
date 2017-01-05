@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta name="format-detection" content="telephone=no,address=no,email=no" />
 <title>はさんでひっくりかえすやつ</title>
-<link href="https://fonts.googleapis.com/earlyaccess/sawarabigothic.css" rel="stylesheet" />
+<link href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 <link href="style.css" rel="stylesheet" />
 </head>
 <body>

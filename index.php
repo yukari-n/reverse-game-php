@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta name="format-detection" content="telephone=no,address=no,email=no" />
 <title>はさんでひっくりかえすやつ</title>
-<link href="https://fonts.googleapis.com/earlyaccess/sawarabigothic.css" rel="stylesheet" />
+<link href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 <link href="style.css" rel="stylesheet" />
 </head>
 <body>
@@ -29,7 +29,7 @@ else{ //if($_POST['put'])
 	++$_SESSION['count'];
 }
 
-echo '<div style="display:inline;">';
+echo '<div class="col-md-6">';
 if($_SESSION['count'] > 0){
 	echo before_put();
 
@@ -102,7 +102,7 @@ if($_SESSION['count'] > 0){
 	$_SESSION['pl_can_put'] = search_can_put($_SESSION['cp_map'],$_SESSION['pl_can_put']);
 }
 
-echo '</div><div style="display:inline;">';
+echo '</div><div class="col-md-6">';
 /*
  * あとやること
  * 置ける場所の更新（追加）：ユーザーがおき終わった時点でやるべし
