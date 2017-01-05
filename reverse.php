@@ -79,14 +79,13 @@ function reverse_stone($color,$target){
 				}
 				elseif($_SESSION['map'][$x][$y] == $me){ //味方発見（隣接していない）
 					$do_put = 1;
+					array_push($me_map,$target); //見方リストに追加
 					foreach($reverse as $rev){
 						$split = str_split($rev);
 						$_SESSION['map'][$split[0]][$split[1]] = $me;
+						array_push($me_map,$rev); //見方リストに追加
 					}
 					$_SESSION['map'][$data[0]][$data[1]] = $me;
-					//見方リストに追加
-					array_push($me_map,$target); //ここで配列が入っている？
-					array_push($me_map,$reverse);
 					//相手リストから削除
 					$you_map = array_diff($you_map,$reverse);
 					$you_put_map = array_diff($you_put_map,array($target));
