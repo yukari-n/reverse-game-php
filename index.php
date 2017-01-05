@@ -32,12 +32,11 @@ if($_SESSION['count'] > 0){
 	echo before_put();
 
 	$put = $_POST['put'];
-	if(!$put || $put == $prev_put){
+	if(!$put){
 		echo '<p>(・ω・)パスするの？</p>';
 	}
 	else{//ひっくり返す
 		$do_reverse = reverse_stone('B',$put);
-		$prev_put = $put;
 		$_SESSION['pl_map'] = $do_reverse[1];
 		$_SESSION['cp_map'] = $do_reverse[2];
 		$_SESSION['pl_can_put'] = $do_reverse[3];
