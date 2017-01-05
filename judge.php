@@ -1,5 +1,7 @@
 <?php
-echo '<p>(・ω・)',count($_SESSION['cp_map']),'個の白石と',count($_SESSION['pl_map']),'の黒石があるね</p>';
+$white_count = count($_SESSION['cp_map']);
+$black_count = count($_SESSION['pl_map']);
+echo '<p>(・ω・)',$white_count,'個の白石と',$black_count,'の黒石があるね</p>';
 
 if($white_count > $black_count){
 	echo '<p style="color:#00f;">(・∀・)ぼくの勝ち！</p>';
