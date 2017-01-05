@@ -31,7 +31,7 @@ else{ //if($_POST['put'])
 if($_SESSION['count'] > 0){
 	echo before_put();
 
-	$put = $_POST['put'];
+	$put = $_POST['put'][0];
 	if(!$put){
 		echo '<p>(・ω・)パスするの？</p>';
 	}

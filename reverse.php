@@ -85,7 +85,7 @@ function reverse_stone($color,$target){
 					}
 					$_SESSION['map'][$data[0]][$data[1]] = $me;
 					//見方リストに追加
-					array_push($me_map,$target);
+					array_push($me_map,$target); //ここで配列が入っている？
 					array_push($me_map,$reverse);
 					//相手リストから削除
 					$you_map = array_diff($you_map,$reverse);
