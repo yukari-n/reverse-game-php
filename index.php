@@ -39,13 +39,13 @@ if($_SESSION['count'] > 0){
 	else{//ひっくり返す
 		$do_reverse = reverse_stone('B',$put);
 		$_SESSION['pl_map'] = $do_reverse[1];
-		print_r($_SESSION['pl_map']);
+		//print_r($_SESSION['pl_map']);
 		$_SESSION['cp_map'] = $do_reverse[2];
-		print_r($_SESSION['cp_map']);
+		//print_r($_SESSION['cp_map']);
 		$_SESSION['pl_can_put'] = $do_reverse[3];
-		print_r($_SESSION['pl_can_put']);
+		//print_r($_SESSION['pl_can_put']);
 		$_SESSION['cp_can_put'] = $do_reverse[4];
-		print_r($_SESSION['cp_can_put']);
+		//print_r($_SESSION['cp_can_put']);
 
 		echo '<p>プレイヤーが置いた時点</p><table>';
 		for($j=0;$j<=8;++$j){//x,yにするため表示はiとjが逆
@@ -88,7 +88,7 @@ if($_SESSION['count'] > 0){
 			$target_id = array_rand($_SESSION['cp_can_put']);
 			$target = $_SESSION['cp_can_put'][$target_id];
 			$data = str_split($target);
-			echo '<p>I choose (',$data[0],',',$data[1],').</p>';
+			echo '<p>(・ω・)ぼくは(',$data[0],',',$data[1],')に置いてみようかな</p>';
 			//ひっくり返せる場所を探す
 			$do_reverse = reverse_stone('W',$target);
 			$_SESSION['cp_map'] = $do_reverse[1];
@@ -99,7 +99,7 @@ if($_SESSION['count'] > 0){
 		}
 	//}
 	if(!isset($do_reverse[0])){
-		echo '<p>I cannot put my stone! Please continue.</p>';
+		echo '<p>(´・ω・｀)どこにも置けないみたい。どうぞ続けて</p>';
 	}
 	//プレイヤーが置ける場所を探索
 	$_SESSION['pl_can_put'] = search_can_put($_SESSION['cp_map'],$_SESSION['pl_can_put']);
