@@ -66,6 +66,7 @@ else{ //if($_POST['put'])
 	++$_SESSION['count'];
 }
 
+echo '<div style="display:inline;">';
 if($_SESSION['count'] > 0){
 	echo '<p>プレイヤーが置く前</p><table>';
 	for($j=0;$j<=8;++$j){//x,yにするため表示はiとjが逆
@@ -159,6 +160,8 @@ if($_SESSION['count'] > 0){
 	//プレイヤーが置ける場所を探索
 	$_SESSION['pl_can_put'] = search_can_put($_SESSION['cp_map'],$_SESSION['pl_can_put']);
 }
+
+echo '</div><div style="display:inline;">';
 /*
  * あとやること
  * 置ける場所の更新（追加）：ユーザーがおき終わった時点でやるべし
@@ -205,6 +208,7 @@ for($j=0;$j<=8;++$j){//x,yにするため表示はiとjが逆
 }
 echo '</table></form>';
 ?>
+</div>
 <h2>遊び方</h2>
 <p>(・ω・)黒が先手で相手を上下左右斜めにはさむよ</p>
 <p>(・ω・)ぼくが白でいいよ</p>
