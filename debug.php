@@ -6,10 +6,10 @@ function before_put(){
 		for($i=0;$i<=8;++$i){
 			$html .= '<td>';
 			if($i == 0){
-				$html .= '<span class="white">',$j,'</span>';
+				$html .= '<span class="white">'.$j.'</span>';
 			}
 			elseif($j == 0){
-				$html .= '<span class="white">',$i,'</span>';
+				$html .= '<span class="white">'.$i.'</span>';
 			}
 			elseif(!isset($_SESSION['map'][$i][$j])){
 				$html .= '　';
