@@ -1,6 +1,6 @@
 <?php
 function before_put(){
-	$html = '<p>前回置いたのは'.$pre_put.'</p><p>プレイヤーが置く前</p><table>';
+	$html = '<p>前回置いたのは'.$prev_put.'</p><p>プレイヤーが置く前</p><table>';
 	for($j=0;$j<=8;++$j){//x,yにするため表示はiとjが逆
 		$html .= '<tr>';
 		for($i=0;$i<=8;++$i){
