@@ -38,9 +38,13 @@ if($_SESSION['count'] > 0){
 	else{//ひっくり返す
 		$do_reverse = reverse_stone('B',$put);
 		$_SESSION['pl_map'] = $do_reverse[1];
+		print_r($_SESSION['pl_map']);
 		$_SESSION['cp_map'] = $do_reverse[2];
+		print_r($_SESSION['cp_map']);
 		$_SESSION['pl_can_put'] = $do_reverse[3];
+		print_r($_SESSION['pl_can_put']);
 		$_SESSION['cp_can_put'] = $do_reverse[4];
+		print_r($_SESSION['cp_can_put']);
 
 		echo '<p>プレイヤーが置いた時点</p><table>';
 		for($j=0;$j<=8;++$j){//x,yにするため表示はiとjが逆
@@ -104,7 +108,6 @@ if($_SESSION['count'] > 0){
  * あとやること
  * 置ける場所の更新（追加）：ユーザーがおき終わった時点でやるべし
  * 置いてはいけない場所の削除
- * パス機能（自動でも良い）
  * 全部埋まるかパスが続いたら終了、戦績を計算
  */
 

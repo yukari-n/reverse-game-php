@@ -1,6 +1,5 @@
 <?php
-echo '<p>There are ',count($_SESSION['cp_map']),' white stones.</p>';
-echo '<p>There are ',count($_SESSION['pl_map']),' black stones.</p>';
+echo '<p>(・ω・)',count($_SESSION['cp_map']),'個の白石と',count($_SESSION['pl_map']),'の黒石があるね</p>';
 //数がおかしい（少ない）
 
 echo '<p>I could put ',count($_SESSION['cp_can_put']),' places.</p>';

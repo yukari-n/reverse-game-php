@@ -59,7 +59,7 @@ function reverse_stone($color,$target){
 	$data = str_split($target);
 
 	if($color == 'B'){
-		echo '<p>You put at (',$data[0],',',$data[1],')</p>';
+		echo '<p>(・ω・)きみは(',$data[0],',',$data[1],')に置いたので</p>';
 	}
 	$do_put = null;
 	for($i=-1;$i<2;++$i){ //横方向
@@ -106,7 +106,7 @@ function reverse_stone($color,$target){
 		if($do_put){
 			echo '<p>(・ω・)ぼくは(',$data[0],',',$data[1],')に置いたよ</p>';
 		}
-		else{
+		else{ //debug用
 			echo '<p>(´・ω・｀) (',$data[0],',',$data[1],')には置けないみたいだね</p>';
 		}
 	}
