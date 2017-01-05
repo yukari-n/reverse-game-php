@@ -32,7 +32,7 @@ if($_SESSION['count'] > 0){
 	echo before_put();
 
 	$put = $_POST['put'];
-	if($put == 'pass'){
+	if(!$put || $put == $prev_put){
 		echo '<p>(・ω・)パスするの？</p>';
 	}
 	else{//ひっくり返す
@@ -98,6 +98,7 @@ if($_SESSION['count'] > 0){
 	}
 	//プレイヤーが置ける場所を探索
 	$_SESSION['pl_can_put'] = search_can_put($_SESSION['cp_map'],$_SESSION['pl_can_put']);
+	$prev_put = $put;
 }
 
 /*
@@ -116,7 +117,7 @@ if($_SESSION['count'] > 0 && count($_SESSION['cp_can_put']) == 0 && count($_SESS
 	include('judge.php');
 }
 else{
-	echo '<input type="submit" value="OK"> <input type="radio" id="pass" name="put" value="pass"><label for="pass" class="selected pass">&#x25a0; パス</label>';
+	echo '<input type="submit" value="OK"> <input type="radio" id="pass" name="put" value=""><label for="pass" class="selected pass">&#x25a0; パス</label>';
 }
 
 echo '<table>';
